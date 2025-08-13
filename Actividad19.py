@@ -75,14 +75,11 @@ class data_filled:
         print("-"*10 + "AGREGAR RELLENO A LA GALLETA" + "-"*10)
         name, price, weight = self.addedCookie()
         while True:
-            print("1. Chocolate\n"
-                  "2. Crema\n"
-                  "3. Caramelo")
             filled = input("Ingrese que relleno desea agregar a la galleta: ")
             if filled != " ": break
             else:
                 print("Relleno vacio, ingresalo de nuevo.")
-        self.cookies.append(Relleno(name,price, weight, filled))
+        self.cookies.append(Relleno(name))
 
     def cookie_list(self):
         if self.cookies:
@@ -105,7 +102,7 @@ class data_filled:
                 else:
                     print("No se ha encontrado esa galleta, intente de nuevo.")
 
-    def delete_cookie(self):
+    def deleted_cookie(self):
         if self.cookies:
             print("-"*10 + "ELIMINAR GALLETA POR NOMBRE"+ "-"*10)
             deleted = input("Ingrese el nombre de la galleta que desea eliminar:  ").lower()
@@ -120,7 +117,7 @@ class data_filled:
 
 
 def hi():
-    print("-"*10 + "BIENVENIDO AL REGISTRO DE GALLETAS" + "-"*10)
+    print("-"*20 + "BIENVENIDO AL REGISTRO DE GALLETAS" + "-"*20)
 while True:
     try:
         hi()
@@ -136,16 +133,24 @@ while True:
             case 1:
                 data_filled.add_cookie()
             case 2:
-                print()
+                data_filled.add_chips_cookie()
             case 3:
-                print()
-
+                data_filled.filled_cookie()
             case 4:
-                print("-"*10 + "LISTA DE GALLETAS" + "-"*10)
-
+                data_filled.cookie_list()
+            case 5:
+                data_filled.find_cookie()
+            case 6:
+                data_filled.deleted_cookie()
+            case 7:
+                print("Saliendo...")
+            case _:
+                print("Ingrese una opcion valida.")
                 break
     except ValueError:
         print("Ingrese un valor valido")
     except TypeError:
         print("Ingrese un tipo de valor valido")
-
+    except Exception as e:
+        print("Un error inesperado ha ocurrido\n"
+              "error: ", e)
