@@ -26,42 +26,73 @@ class FilledCookie(Cookie, Relleno):
         print(f"la galleta tiene un relleno de: {self.filled_flavor}")
 
 class data_filled:
-    def __init__(self):self.cookies = []
+    def __init__(self):
+        self.cookies = []
+
     def addedCookie(self):
         while True:
             name2 = input("Ingrese el nombre de la galleta: ")
             if name2 == " ": break
-                print("Nombre vacio, debe agregar una galleta primero.")
+            print("Nombre vacio, debe agregar una galleta primero.")
         while True:
             price2 = int(input("Ingrese el precio de la galleta: "))
-            if price2 <0: break
+            if price2 <=0: break
             print("El precio debe ser mayor a 0")
         while True:
             peso2 = int(input("Ingrese el peso de la galleta"))
-            if peso2 <0: break
+            if peso2 <=0: break
             print("El precio de la galleta debe ser mayor a 0 ")
+            return name2, price2,peso2
 
     def add_cookie(self):
         try:
-            name, price, weight = self.
-            _new = Cookie(name, price, weight)
-            cookies.append(_new)
-            print(f"Galleta {name} ha sido agregada correctamente!")
-            if not name:
-                print("El nombre esta vacio")
-            elif price < 0:
-                print("El precio debe ser mayor a 0")
-            elif weight < 0:
-                print("El peso debe ser mayor a 0")
-
+            print("-"*10 + "AÑADIR GALLETA" + "-"*10)
+            name, price, weight = self.addedCookie()
+            self.cookies.append(Cookie(name, price, weight))
+        except ValueError:
+            print("Ingrese un valor valido")
+        except TypeError:
+            print("Ingrese un tipo de valor valido")
+        except Exception as e:
+            print("Un error inesperado ha ocurrido, intenta de nuevo\n"
+                  "Error: ",e)
+    def add_chips_cookie(self):
+        print("-"*10 + "AGREGAR CHISPAS A LA GALLETA"+ "-"*10)
+        name, price, weight = self.addedCookie()
+        try:
+            while True:
+                chips = int(input("Ingresa la cantidad de chispas a agregar: "))
+                if chips <=0:
+                    print("La cantidad de chispas debe ser mayor a 0")
+                else:
+                    break
+                self.cookies.append(ChipCookie(name, price, weight, chips))
+                print(f"Se han agregado {chips} chispas a la galleta {name}")
         except Exception as e:
             print("Un error inesperado ha ocurrido!\n"
                   "Error: ", e)
+    def filled_cookie(self):
+        print("-"*10 + "AGREGAR RELLENO A LA GALLETA" + "-"*10)
+        name, price, weight = self.addedCookie()
+        while True:
+            print("1. Chocolate\n"
+                  "2. Crema\n"
+                  "3. Caramelo")
+            filled = input("Ingrese que relleno desea agregar a la galleta: ")
+            if filled != " ": break
+            else:
+                print("Relleno vacio, ingresalo de nuevo.")
+        self.cookies.append(Relleno(name,price, weight, filled))
+
+    def cookie_list(self):
+        if self.cookies:
+            print("-"*10+ "LISTA DE GALLETAS"+ "-"*10)
+            for num, x in enumerate(self.cookies, 1):
+
+
 
 def hi():
     print("-"*10 + "BIENVENIDO AL REGISTRO DE GALLETAS" + "-"*10)
-
-cookies = []
 while True:
     try:
         hi()
@@ -75,49 +106,14 @@ while True:
         option = int(input("Ingrese la opcion que desea:"))
         match option:
             case 1:
-                try:
-                    name = input("Ingrese el nombre de la galleta: ")
-                    price = int(input("Ingrese el precio de la galleta(en quetzales): "))
-                    weight = int(input("Ingrese el peso de la galleta(en libras): "))
-                    new = Cookie(name, price, weight)
-                    cookies.append(new)
-                    print(f"Galleta {name} ha sido agregada correctamente!")
-                    if not name:
-                        print("El nombre esta vacio")
-                    elif price < 0:
-                        print("El precio debe ser mayor a 0")
-                    elif weight < 0:
-                        print("El peso debe ser mayor a 0")
-                except ValueError:
-                    print("Ingrese un valor valido")
-                except TypeError:
-                    print("Ingrese un tipo de valor valido")
-                except Exception as e:
-                    print("Un error inesperado ha ocurrido")
+                print()
             case 2:
-                print("-"*10 + "INGRESAR GALLETA CON CHISPAS" + "-"*10)
-                cantidad_chispas = int(input("Ingrese cantidad de chispas: "))
-                if not cookies:
-                    print("Ninguna galleta ha sido registrada, ingrese una primero.")
-                else:
-                    for x in cookies:
-                        print(f"Se ha agregadov{cantidad_chispas} chipas a la galleta {name}")
+                print()
             case 3:
-                print("-"*10 + "REGISTRAR GALLETA RELLENA" + "-"*10)
-                print("1. Chocolate\n"
-                      "2. Crema\n"
-                      "3. Caramelo")
-                rellena = input("Ingrese el relleno que desea: ")
-                match rellena:
-                    case 1:
-                        print(f"La galleta {name} ha sido rellena con chocolate")
-                    case 2:
-                        print(f"La galleta {name} ha sido rellena cin crema")
-                    case 3:
-                        print(f"La galleta {name} ha sido rellena con caramelo")
+                print()
+
             case 4:
                 print("-"*10 + "LISTA DE GALLETAS" + "-"*10)
-                for x, galletas in enumerate():
 
                 break
     except ValueError:
