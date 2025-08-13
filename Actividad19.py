@@ -88,6 +88,34 @@ class data_filled:
         if self.cookies:
             print("-"*10+ "LISTA DE GALLETAS"+ "-"*10)
             for num, x in enumerate(self.cookies, 1):
+                print(f"{num} ", end="")
+                x.show_info()
+        else:
+            print("Ninguna galleta ha sido agregada, agrega una primero.")
+
+    def find_cookie(self):
+        if self.cookies:
+            print("-"*10 + "ENCONTRAR GALLETA POR NOMBRE"+ "-"*10)
+            found = input("Ingrese el nombre de la galleta que busca: ").lower()
+            for i in self.cookies:
+                if i.found.lower() == found:
+                    i.show_info()
+                    print(f"La galleta encontrada es: {i}")
+                    break
+                else:
+                    print("No se ha encontrado esa galleta, intente de nuevo.")
+
+    def delete_cookie(self):
+        if self.cookies:
+            print("-"*10 + "ELIMINAR GALLETA POR NOMBRE"+ "-"*10)
+            deleted = input("Ingrese el nombre de la galleta que desea eliminar:  ").lower()
+            for y in self.cookies:
+                if y.deleted.lower() == deleted:
+                    y.show_info()
+                    print("Galleta eliminada")
+                    break
+                else:
+                    print("Galleta no encontrada, intente de nuevo. ")
 
 
 
@@ -106,7 +134,7 @@ while True:
         option = int(input("Ingrese la opcion que desea:"))
         match option:
             case 1:
-                print()
+                data_filled.add_cookie()
             case 2:
                 print()
             case 3:
